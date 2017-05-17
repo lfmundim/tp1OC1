@@ -1,0 +1,25 @@
+\begin{center}
+ {\large Trabalho Prático 1: Programação Assembly para MIPS\\[1mm]}
+ {\footnotesize Organização de Computadores I\\}
+ {\footnotesize Lucas Fonseca Mundim - 2015042134\\}
+ {\footnotesize Pedro Nascimento Costa - 2015083388\\ [2.0cm]}
+\end{center}
+
+\section{Introdução}
+O Trabalho Prático 1 tem como objetivo o trabalho em linguagem {\it MIPS} para aprender o funcionamento de processadores {\it unicycle} e com {\it pieplining}. Para tal, a tarefa selecionada foi simples: cálculo da quantidade de números primos presentes em um intervalo dado previamente. Para definir se um número é primo, uma maneira é verificar se seus únicos divisores são $1$ e ele mesmo, ou seja, verificar a divisão exata de um número $n$ pelos números $\{1, n-1\}$.\par
+Para o desenvolvimento do trabalho, foi utilizado o programa {\it DrMIPS} para a simulação de todo o processo do programa baseado no código, utilizando {\it CPUs} pré-definidas ({\it unicycle-extended e pipeline-extended}) tanto para a parte inicial em {\it unicycle} quanto para a final em {\it pipeline}.
+
+\section{Solução do Problema}
+\subsection{Unicycle}
+Inicialmente foram declarados valores arbitrários para limites inferior e superior do intervalo a ser avaliado, que por sua vez foram armazenados em nos registradores $s0$ e $s1$, respectivamente. Inicia-se o registrador $s2$ como zero, utilizado para comparação do resto, e um registrador $t1$ como o limite inferior do intervalo, utilizado para delimitar o {\it loop} que será feito. Depois inicia-se um contador no registrador $t2$ com 2, dado que este é o primeiro número a ser tomado como divisor, já que 1 divide qualquer número e não serve para verificar se um número é primo.\par
+O programa conta com dois {\it loops}, um interno e um externo. O {\it loop} externo se encerra quando o contador $t1$ se iguala ao valor máximo do intervalo ($s1$), indo para a função fdeshinal do programa.\par
+O loop interno realiza as divisões de um número por todos os números anteriores a ele, a começar do 2, de forma a testar se é primo. Caso ele encontre um número que divida o número testado, o loop interno é encerrado e o número é dado como não primo. Caso nenhum número anterior ao testado o divida, o número é dado como primo, o contador de primos é incrementado de um e o número primo é salvo na memória.\par
+Na função final, o programa armazena o valor obtido no registrador $t0$ no registrador de retorno $v0$ e encerra o programa.
+
+\subsection{Pipeline}
+Primeiramente, todos os $j$'s da máquina uniciclo foram mudados para $b$'s, pois a máquina com pipeline utiliza essa chamada para pulos incondicionais. Fora isso, a única modificação foi o acréscimo de uma checagem condicional para evitar que o número que seria o divisor passasse do limite estipulado, o que estava gerando um loop infinito anteriormente.
+
+\section{Avaliação Experimental}
+
+
+\section{Conclusão}
